@@ -2,13 +2,14 @@
 
 <div>
 	<section class="todoapp">
+  <div class="todoappD">
   <h1 class="do">{{title}}</h1>
     <span style="
     text-align:  center;
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: -45px;
 "><h3 style="    background-color: #222222;" class="tcenter c-whiteI">{{helper}}</h3></span>
+</div>
   <header class="header">
 
     <input class="new-todo"
@@ -50,8 +51,8 @@
       <li><a @click="visibility='all'" :class="{ selected: visibility == 'all' }">All</a></li>
       <li><a @click="visibility='active'" :class="{ selected: visibility == 'active' }">Active</a></li>
       <li><a @click="visibility='completed'" :class="{ selected: visibility == 'completed' }">Completed</a></li>
-      <li><a @click="co();move+=1" v-if="drop">{{m[move%2]}}</a></li>
-      <li><a @click="drop=!drop" >{{!drop ? 'Move' : 'Static'}}</a></li>
+      <!-- <li><a @click="co();move+=1" v-if="drop">{{m[move%2]}}</a></li> -->
+      <!-- <li><a @click="drop=!drop" >{{!drop ? 'Move' : 'Static'}}</a></li> -->
     </ul>
     <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
       Clear completed
@@ -431,7 +432,7 @@ body {
   // overflow: scroll!important;
     // height: 59vh;
 	background: #fff;
-	margin: 130px 0 40px 0;
+	// margin: 130px 0 40px 0;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -455,10 +456,11 @@ body {
 	color: $brown;
 }
 }
-
+.todoappD{
+  background-color: #222222!important;
+}
 .todoapp h1 {
-	position: absolute;
-	top: -100px;
+	position: relative;
 	width: 100%;
 	/*font-size: 100px;*/
 	font-weight: 100;

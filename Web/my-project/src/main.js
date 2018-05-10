@@ -102,8 +102,8 @@ Vue.use(VueAuth, {
     authRedirect : "/",
     notFoundRedirect: {path:"/"}
 })
-
-Vue.axios.defaults.baseURL = 'http://34.246.86.37:4000';
+console.log(process)
+Vue.axios.defaults.baseURL = process.env.NODE_ENV == "production" ?  'http://34.246.86.37:4000' : "http://localhost:4000";
 
 
 var VueVue = {

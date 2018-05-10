@@ -56,7 +56,7 @@ export default  {
         return function(currentView){
           // console.log(date)
           var viewName=currentView.name
-          // console.log(viewName)
+          if (viewName in ["month,agendaWeek,agendaDay"]) {
           if(currentView.start.isSame(moment(),"day") && viewName=="agendaDay"){
 //             var currentHour = moment("hTT");
 //     var $viewWrapper = $("div.fc-"+viewName+"-view div.fc-body");
@@ -84,6 +84,7 @@ export default  {
       $(".fc-next-button").removeClass('fc-state-disabled'); 
       $(".fc-next-button").prop('disabled', false); 
     }
+  }
     return true;
 
 //           if(from){
@@ -111,9 +112,9 @@ export default  {
     var args = {
       locale: "fr",
       header: {
-        left:   'prev,next TodoList',
-        center: 'title',
-        right:  'month,agendaWeek,agendaDay,listDay,listWeek,listMonth,listSession'
+        left:   'prev,next',
+        center: '\n title',
+        right:  'customCACA,month,agendaWeek,agendaDay'
       },
       height: "auto",
       scrollTime:"06:00:00",
@@ -121,6 +122,7 @@ export default  {
       slotEventOverlap: false,
       timeFormat: 'HH:mm',
       firstDay:1,
+      defaultView:"customCACA",
       nowIndicator: true,
       themeSystem:"bootstrap4",
       events: self.events,
@@ -140,17 +142,20 @@ export default  {
         }
   	  },
       buttonText:{
+        customCACA:"Session",
               listDay:"EventJour",
               listWeek:"EventSemaine",
               listMonth:"EventMois"
 
       },
             viewRender: function(view,el) {
+              if (view.name=="customCACA") {
+                  $(".fc-center").removeClass("mt-10").addClass("mt-42")
+                }else{
+                    $(".fc-center").removeClass("mt-42").addClass("mt-10")
+                }
 
-            	console.log(view)
-				console.log(view.name)
-console.log(view.start)
-console.log(view.start!=self.from)
+
             	if (view.name=="listSession") {
             		if (!view.start.isSame(self.from)) {
  self.cal.fullCalendar('gotoDate',self.from.format("YYYY-MM-DD"));//start date here
@@ -175,6 +180,18 @@ console.log(view.start!=self.from)
                 end: this.to.format("YYYY-MM-DD") //end date here
             },
       customButtons: {
+          Session: {
+            text: 'Session',
+             click: function(t) {
+              console.log($(t.target).parent().find("button"))
+              $(t.target).parent().find("button").each((tt,n)=>{
+                console.log(n)
+                $(n).removeClass("active")
+              })
+              $(t.target).toggleClass("active")
+               self.$emit("sessionClick");
+             }
+          },
           TodoList: {
               text: 'TodoList',
               click: function(t) {
@@ -210,7 +227,7 @@ console.log(view.start!=self.from)
     this.$parent.$on('refreshFC', this.refresh);
     if (self.editable)
     {
-      args.editable = true;
+      args.editable = false;
       args.eventResize = function(event)
       {
         self.$emit('event::resized', event);
@@ -224,7 +241,7 @@ console.log(view.start!=self.from)
     
     if (self.droppable)
     {
-      args.droppable = true;
+      args.droppable = false;
       args.eventReceive = function(event)
       {
         self.$emit('event::received', event);
@@ -232,8 +249,8 @@ console.log(view.start!=self.from)
     }
     if (self.selectable)
     {
-      args.selectable = true;
-      args.selectHelper = true;
+      args.selectable = false;
+      args.selectHelper = false;
       args.select = function(start,end)
       {
 

@@ -60,8 +60,8 @@ public class TestBase {
 		sess.ui=u;
 		sess.setName("default");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Date d = sdf.parse("01/03/2018");
-		
+		// Date d = sdf.parse("01/03/2018") new Date();
+		Date d = TK.getFirstDayDate(new Date());
 		sess.date=d;
 		sess.months = TK.createStructureMWD(d);
 		DateFormat sF = DateFormat.getDateTimeInstance(

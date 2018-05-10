@@ -5,7 +5,7 @@
 
 
    module.exports = function plugin(Vue,options) {
-		vue = Vue
+		var vue = Vue
 		// var crud = options["crud"]
         // console.log(options)
 		for(var index in options) { 

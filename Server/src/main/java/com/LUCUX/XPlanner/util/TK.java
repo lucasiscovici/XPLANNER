@@ -108,13 +108,109 @@ public class TK {
 		return lm;
 		
 	}
-	static int getLastDay(Date d) {
+	public static List<Month> createStructureMWD2(Date d) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d);
+		List<Month> lm = new ArrayList<>();
+		List<Day> lmda = new ArrayList<>();
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+		for (int i = 0; i <TK.numMonth; i++) {
+			Month m = new Month();
+			cal.setTime(d);
+			cal.add(Calendar.MONTH, i);
+			cal.set(Calendar.DAY_OF_MONTH, 1);
+
+			m.date=cal.getTime();
+			int myMonth=cal.get(Calendar.MONTH);
+			map.put(myMonth,i);
+			// List<Week> lw = new ArrayList<>();
+			// Week w = null;
+			while (myMonth==cal.get(Calendar.MONTH)) {
+				// if ((cal.get(Calendar.DAY_OF_MONTH)-1)%7==0) {
+		  //   			w = new Week();
+		  //   			w.date=cal.getTime();
+		  //   			lw.add(w);
+			 //    }
+				Day dd = new Day();
+				dd.date=cal.getTime();
+				
+				lmda.add(dd);
+			    cal.add(Calendar.DAY_OF_MONTH, 1);
+			}
+			// m.weeks.addAll(lw);
+			lm.add(m);
+		}
+		List<Week> lmdw = new ArrayList<>();
+
+		Calendar calo = Calendar.getInstance();
+		calo.setTime(d);
+		calo.set(Calendar.DAY_OF_MONTH, 1);
+		int j = calo.get(Calendar.DAY_OF_WEEK)-1;
+		if (j==0) {
+			j=7;
+		}
+		j-=1;
+		int iii=0;
+		List<Day>  dda = new ArrayList<>();
+		Week w = null;
+		for (Day ddv: lmda ) {
+			
+			if (iii%7==0) {
+				if (iii!=0) {
+					w.days.addAll(dda);
+					lmdw.add(w);
+					dda.clear();
+				}
+				w = new Week();
+				w.date=ddv.getDate();
+			}
+			dda.add(ddv);
+			iii+=1;
+
+		}
+		if (dda.size()>0) {
+			w.days=dda;
+		}
+
+		// List<Month> lmdm = new ArrayList<>();
+
+		for (Week ww: lmdw ) {
+			Calendar calp = Calendar.getInstance();
+			calp.setTime(ww.getDate());
+			int month = calp.get(Calendar.MONTH);
+			int vr = map.get(month);
+			lm.get(vr).getWeeks().add(ww);
+
+			Calendar cal2 = Calendar.getInstance();
+			List<Day> sdl =ww.getDays();
+			cal2.setTime(sdl.get(sdl.size()-1).getDate());
+			int month2 = cal2.get(Calendar.MONTH);
+			if (month2!=month) {
+				
+			
+				int vrP = map.get(month2);
+				lm.get(vrP).getWeeks().add(ww);
+			}
+
+		}
+		return lm;
+		
+	}
+	public static int getLastDay(Date d) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(d);
 		cal.set(Calendar.DAY_OF_MONTH, 1); 
 		cal.add(Calendar.MONTH, 1);
 		cal.add(Calendar.DAY_OF_MONTH, -1);
 		return cal.get(Calendar.DAY_OF_MONTH);
+	}
+	public static Date getFirstDayDate(Date d) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d);
+		cal.set(Calendar.DAY_OF_MONTH, 1); 
+		return cal.getTime();
+
 	}
 	
 	public static boolean keyInMap(String string) {

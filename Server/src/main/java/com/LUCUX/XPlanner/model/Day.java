@@ -9,11 +9,13 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Day extends TodosBaseDate {
-	
+	@JsonIgnore
 	List<ListeItem> toDoList = new ArrayList<ListeItem>();
+	@JsonIgnore
 	List<ListeItem> toDoListAll = new ArrayList<ListeItem>();
 	
 	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true)

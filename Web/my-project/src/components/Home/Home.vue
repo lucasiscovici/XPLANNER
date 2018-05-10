@@ -41,7 +41,7 @@
 </template>
 <script>
     import TDL from "../TDL/TDL.vue"
-import TK  from "../utils/tk.js"
+	import TK  from "../utils/tk.js"
 	export default {
 		data(){
 			return {
@@ -56,8 +56,8 @@ import TK  from "../utils/tk.js"
         textT:"Afficher",
         okTDL2:false,
         customTD2:null,
-        okP:false,
-        TDL2:"de la Session "+this.$store.state.sesscur.name,
+        okP:true,
+        TDL2:"de la Session \""+this.$store.state.sesscur.name+"\"",
         Tdl2Helper:"(pour les 3 mois)",
         nameC:{"month":"month","agendaWeek":"week","agendaDay":"day","listDay":"month",
 "listWeek":"week",
@@ -66,6 +66,7 @@ import TK  from "../utils/tk.js"
 		},
 		components:{TDL:TDL},
 		created(){
+			this.customTD2=this.customSess();
 				this.$bus.$on("todoList::OK",this.tl)
 				this.$bus.$on("todoList::NOK",()=>this.okP=false);
 				// alert("HOMEEEsEE")
@@ -103,9 +104,9 @@ import TK  from "../utils/tk.js"
 				this.okTDL2 = false;
 			},
 			customTDL2(){
-				// console.log("±customTDL2")
+				console.log(this.customTD2)
 				// console.log(this.okP)
-				return this.okP ? this.customTD2 : this.customSess();
+				return this.customTD2 ;
 			},
 			re(){
 				// console.log("re")
@@ -141,7 +142,14 @@ import TK  from "../utils/tk.js"
 			},
 			tl(g){
 				console.log("TL")
-				console.log(this.okP)
+				console.log(g.name)
+				console.log(g.name=="customCACA");
+				if (g.name=="customCACA") {
+					this.customTD2=this.customSess();
+					console.log(this.customTD2);
+						this.$emit("refreshTDL");
+					return ;
+				}
 				if (this.okP) {
 					this.Tdl2Helper=""
 				// return
@@ -157,9 +165,10 @@ import TK  from "../utils/tk.js"
 
 				var sessM = self.$session.actual.$p[quoi];
 				var ts=g.intervalStart.valueOf();//TIMESTAMP
-				// console.log(quoi)
-				// console.log(ts)
+				console.log(quoi)
+				console.log(ts)
 				var idS = this.$soup.session.timestamp(quoi,ts)
+				console.log(idS)
 				var crud =  sessM.
 							list[idS].
 							todos;
@@ -186,6 +195,7 @@ import TK  from "../utils/tk.js"
 					console.log("refe")
 					this.$emit("refreshTDL");
 				// }
+				return p;
 				// this.okTDL2 = true
 			}
 				// return p;

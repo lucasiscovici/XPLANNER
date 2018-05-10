@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.LUCUX.XPlanner.model.*;
 import com.LUCUX.XPlanner.model.Month;
 import com.LUCUX.XPlanner.model.Session;
 import com.LUCUX.XPlanner.model.Todo;
@@ -73,6 +73,12 @@ public class MonthController  {
 		monthRepository.save(sess);
 		Month sess2 = monthRepository.findById(id).get();
 		String us = TK.toJSON(sess2.getTodos());
+		return new ResponseEntity<>(us,HttpStatus.OK);
+	}
+	@GetMapping(value="{id}/weeks")
+	public ResponseEntity<String> Gweeks(@PathVariable("id") long id) throws JsonProcessingException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException,ObjectNotFoundException {
+		List<Week> t = monthRepository.findById(id).get().getWeeks();
+		String us = TK.toJSON(t);
 		return new ResponseEntity<>(us,HttpStatus.OK);
 	}
 }

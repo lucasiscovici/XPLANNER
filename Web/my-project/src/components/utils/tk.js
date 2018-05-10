@@ -1,12 +1,17 @@
 
-
-
 export default  { 
 	 objConcat : function(){
     for (var i=1; i<arguments.length; i++)
        for (var a in arguments[i])
          arguments[0][a] = arguments[i][a];
    return arguments[0];
+},
+objToArr: function(obj){
+var f=[]
+for (var j in Object.keys(obj)) {
+	f.push(obj[j])
+}
+return f;
 },
 	log :function(thi,mess) {
 		console.log("DEBUG: "+this.constructor.name+"|"+thi.toString()
@@ -112,6 +117,9 @@ var nk = newKeys;
 	        }
 	    }
 	 return false;
+	},
+	upperF: function(f){
+		return f[0].toUpperCase()+f.slice(1)
 	}
 }
 

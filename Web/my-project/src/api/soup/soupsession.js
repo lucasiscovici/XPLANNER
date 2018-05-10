@@ -22,10 +22,12 @@ class session extends soup {
             ac.month.GET().then((res) => {
                 acp.month.add(res.data, true)
                 this.addToSessCur("month", res.data)
-                r()
-                return 
-                for (var i = 0; i < acp.month.list.length; i++) {
-                    var mi = acp.month.list[i];
+                // r()
+                // return 
+                var ml = TK.objToArr(acp.month.list)
+                console.log(ml)
+                for (var i = 0; i < ml.length; i++) {
+                    var mi = ml[i];
                     mi.GET().then((res2) => {
                         acp.week.add(res2.data)
                         this.addToSessCur("week", res2.data, true)
