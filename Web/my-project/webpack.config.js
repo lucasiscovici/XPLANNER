@@ -111,6 +111,10 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
+    new HtmlWebPackPlugin({
+      template: "./index.html",
+      filename: "./index.html"
+    }),
      // new webpack.optimize.UglifyJsPlugin({
      //  compress: {
      //    warnings: false
@@ -125,10 +129,6 @@ if (process.env.NODE_ENV === 'production') {
     //     warnings: false
     //   }
     // }),
-new HtmlWebPackPlugin({
-      template: "./index.html",
-      filename: "./index.html"
-    }),
     new CopyWebpackPlugin([
       {from:'src/assets',to:'src/assets'} 
     ]),

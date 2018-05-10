@@ -1,0 +1,116 @@
+$brown:#6b4736;
+.bg-brown *{
+	background-color:$brown;
+}
+.c-brown {
+	color:$brown;
+}
+.c-black{
+	color:black;
+}
+.c-blackI{
+	color:black!important;
+}
+.bg-black *{
+		background-color:black;
+
+}
+.c-white * {
+	color: white
+}
+.c-whiteI *,.c-whiteI {
+	color: white!important;
+}
+$list:webkit moz o;
+@mixin prefix($declarations, $prefixes: ()) {
+  @each $property, $value in $declarations {
+    @each $prefix in $prefixes {
+      #{'-' + $prefix + '-' + $property}: $value;
+    }
+
+    // Output standard non-prefixed declaration
+    #{$property}: $value;
+  }
+}
+// @mixin prefixMM($declarations, $prefixes: (),$before) {
+//   @each $property, $value in $declarations {
+//     @each $prefix in $prefixes {
+//       #{$before}#{'-' + $prefix + '-' + $property} {
+//       	@each $property2, $value2 in $value {
+// 			#{$property2}: $value2;
+//       	}
+//       }
+//     }
+
+//     // Output standard non-prefixed declaration
+//     #{$property}: $value;
+//   }
+// }
+// @mixin cB($property) {
+//     @include prefix($property,$list)
+// }
+
+// @mixin cBM($property,$b) {
+//     @include prefixM($property,$list,$b)
+// }
+
+.b,.b :global(*){
+    border:none;
+
+    &, &:hover :global(*), &:focus :global(*), &:active :global(*),
+        & :global(*):hover, & :global(*):focus, & :global(*):active, & :global(*):visited
+    {
+     outline: none!important;
+     border:none!important;
+     box-shadow: none!important;
+    border-color: white!important;
+    background-color: $brown!important;
+}
+}
+.c-pointer{
+cursor:pointer;
+}
+.base{
+	 background-color: $brown;
+	color:white;z-index: 999999;width: 66%;left:15.5%;position: relative;top:50%;transform:translateY(-70%);max-width: 66%;overflow: hidden
+}
+
+// @include cBM((selection:(background-color: $brown)),"::");
+::selection,::-webkit-selection{
+	background-color: $brown;
+}
+.p-abs{
+	position:absolute;
+}
+.p-rel{
+	position: relative;
+}
+$p:(__no__:px,p:%);
+$pm:(m:margin,pd:padding);
+$declarations:(b:bottom, t:top, l:left, r:right);
+@each $property3, $value3 in $p{
+	$pe:"";
+	  	@if $property3 != "__no__" {
+			$pe:$property3
+	  	}
+@each $property2, $value2 in $pm{
+@for $i from 0 through 100 {
+
+	  @each $property, $value in $declarations  {
+		.#{$property2}#{$property}-#{$i}#{$pe}{
+			#{$value2}-#{$value}:#{$i}#{$value3};
+		}
+	  }
+	  	.#{$property2}h-#{$i}#{$pe}{
+			@extend .#{$property2}l-#{$i}#{$pe},.#{$property2}r-#{$i}#{$pe};
+		}
+		.#{$property2}v-#{$i}#{$pe}{
+			@extend .#{$property2}t-#{$i}#{$pe},.#{$property2}b-#{$i}#{$pe};
+		}
+}
+}}
+
+.middle{
+	top: 50%;
+    transform: translateY(-50%);
+}

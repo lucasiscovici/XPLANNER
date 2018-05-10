@@ -7,7 +7,7 @@ app.use(express.static(`${__dirname}/dist`)) // set the static files location fo
 app.engine('.html', require('ejs').renderFile)
 app.set('views', `${__dirname}/dist`)
 router.get('/*', (req, res, next) => {
-  res.sendFile(`${__dirname}/index.html`)
+  res.sendFile(`${__dirname}/dist/index.html`)
 })
 app.use('/', router)
 app.listen(port)
