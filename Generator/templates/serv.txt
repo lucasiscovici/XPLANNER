@@ -1,0 +1,6 @@
+package {{Pkg}}.{{Serv}};
+
+import {{Pkg}}.{{Model}}.{{ModelName}};
+
+public interface {{ServName}} {
+}

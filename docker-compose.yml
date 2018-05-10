@@ -1,0 +1,33 @@
+version: '2'
+networks:
+  my-network2:
+services:
+  db:
+    image: blacklabelops/hsqldb
+    ports:
+      - "9001:9001"
+    container_name: db
+    networks: 
+      - my-network2
+
+  web:
+    build: 
+      context: ./Server
+    image: webs
+    ports:
+     - "4000:8080"
+    depends_on:
+     - db
+    networks:
+      - my-network2
+  front:
+    build:
+      context: ./Web/my-project
+    image: front
+    ports:
+      - "8000:80"
+    depends_on:
+      - web
+      - db
+    networks:
+      - my-network2

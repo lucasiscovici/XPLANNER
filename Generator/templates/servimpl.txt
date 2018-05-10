@@ -1,0 +1,18 @@
+package {{Pkg}}.{{ServImpl}};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import {{Pkg}}.{{Model}}.{{ModelName}};
+import {{Pkg}}.{{Rep}}.{{RepName}};
+import {{Pkg}}.{{Serv}}.{{ServName}};
+
+@Service("{{ServNameV}}")
+@Transactional
+public class {{ServImplName}} implements {{ServName}} {
+
+	@Autowired
+	private {{RepName}} {{RepNameV}};
+
+}
