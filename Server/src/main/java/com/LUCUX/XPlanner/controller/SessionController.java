@@ -77,7 +77,7 @@ public class SessionController  {
 	
 		
 	}
-	
+
 	@GetMapping(value="{id}")
 	public ResponseEntity<String> G(@PathVariable("id") long id,@RequestParam MultiValueMap<String,String> params) throws JsonProcessingException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException,ObjectNotFoundException {
 		

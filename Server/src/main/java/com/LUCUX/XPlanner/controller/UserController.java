@@ -190,7 +190,7 @@ public class UserController  {
 	public ResponseEntity<String> sessions(@PathVariable("id") long id,@RequestBody Session sess) throws JsonProcessingException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException,ObjectNotFoundException {
 		User us = userService.findById(id); 
 		sess.ui=us.userInfo;
-		sess.months = TK.createStructureMWD(sess.date);
+		sess.months = TK.createStructureMWD2(sess.date);
 		us.userInfo.sess.add(sess);
 		userService.save(us);
 		

@@ -8,7 +8,7 @@
               <icon name="spinner"></icon>
               Veuillez patienter...
           </p>
-            <button-spinner @button-spinner-clicked="settings" styley="background-color: transparent!important;text-align:left!important;position:absolute;left:0px;" v-if="$auth.check()">
+            <button-spinner @button-spinner-clicked="settings"  styley="opacity:0.7;background-color: transparent!important;text-align:left!important;position:absolute;left:0px;" v-if="$auth.check()">
                 Settings
             </button-spinner>
             <b-button-router-link s_display="inline" to="App" v-if="!$auth.check()" v-show="!$auth.check()">
@@ -18,7 +18,7 @@
                 Déconnexion
             </button-spinner>
             <div v-if="AOK()">
-                <span @click.self="Editing()" class="btn btn-secondary " v-if="$auth.check()" v-show="!editing">
+                <span @click="Editing()" class="btn btn-secondary " v-if="$auth.check()" v-show="!editing">
                     {{title}}
                     <icon name="pencil-alt" style="color: white">
                     </icon>
@@ -48,14 +48,14 @@
                     <span class="ml-20" style="font-size: 20px;position:relative">
                         <span class="c-brown c-pointer">
                             {{$store.state.sesscur.date | noMiliDate | moment("dddd Do MMMM YYYY")}}
-                            <icon name="calendar-alt" scale="1" style="color: white">
+                            <icon name="calendar-alt" scale="1" style="opacity:0.7;color: white">
                             </icon>
                         </span>
                         <span>
                             <input :class="['edit', 'tcenter',pb ? 'border: 1px solid red':'']" @keyup.enter="enterS" @keyup.esc="escS"  required="" type="text" v-click-outside="escOS" v-if="editingS" v-model="$store.state.sesscur.name" />
-                            <span @click="editingS=true" class="mh-10 c-pointer" style="font-size: 30px;" v-if="!editingS">
+                            <span @click="" class="mh-10 c-pointer" style="font-size: 30px;" v-if="!editingS">
                                 {{$store.state.sesscur.name}}
-                                <icon name="pencil-alt" scale="1.25" style="color: white" >
+                                <icon name="pencil-alt" scale="1.25" style="opacity:0.7;color: white" >
                                 </icon>
                             </span>
                         </span>
@@ -118,6 +118,7 @@ export default {
             pb: false,
             load: false,
             title_:null,
+            title_OLD:"",
             loading:false
                         // notLoad:true
             // okHome:false
@@ -149,6 +150,7 @@ export default {
             // SI PAS DP ON RELOAD
             else if (!this.okDPF()) {
                 this.reload();
+                
             }
         }
     },
@@ -167,6 +169,7 @@ export default {
     mounted() {
         console.log("mounted A")
             this.title_=this.$store.state.user.username 
+            this.title_OLD=this.title_;
 
     },
     created() {
@@ -216,6 +219,9 @@ $('.ATitle').focus()
                             if (r.data == "ok") {
                                 this.load = false
                                 this.editing=false
+                                this.title_OLD=this.title_;
+                                this.$store.state.user.username=this.title_;
+
                             }
                             console.log(r)
                         });
@@ -226,6 +232,7 @@ $('.ATitle').focus()
             }
         },
         esc() {
+            this.title_=this.title_OLD;
             this.editing = false;
         },
         escS() {

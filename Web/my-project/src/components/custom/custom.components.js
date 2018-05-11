@@ -43,6 +43,16 @@ var FC = $.fullCalendar; // a reference to FullCalendar's root namespace
 var View = FC.View;      // the class that all views must inherit from
 var CustomView;          // our subclass
 
+var cg = function(o) {
+  console.log(o)
+  var d=$(o.target).attr("data-date")
+  o=moment(d,"MMMM YYYY")
+  console.log(o)
+  $(".cal").fullCalendar('gotoDate', o);
+            $(".cal").fullCalendar('changeView', 'month');
+}
+window.cg=cg;
+document.cg=cg;
 CustomView = View.extend({ // make a subclass of View
 
   initialize: function() {
@@ -66,6 +76,7 @@ CustomView = View.extend({ // make a subclass of View
     var dlf=`
         <style>
           .tdCustomCal {
+            cursor:pointer;
             border-color: #6b4736 !important;
                 vertical-align: middle !important;
     height: 129px;
@@ -85,13 +96,13 @@ for (var m =  this.mstart.clone().startOf('month') ; m.isBefore(this.mend); m.ad
 
   dlf+=`
         <tr>
-                <td class="tdCustomCal fc-today">`+toFormat(m)+`</td>
+                <td class="tdCustomCal fc-today" onclick="cg(event)" data-date="`+toFormat(m)+`">`+toFormat(m)+`</td>
               </tr>
   `;
 }else{
    dlf+=`
         <tr>
-                <td class="tdCustomCal">`+toFormat(m)+`</td>
+                <td class="tdCustomCal" onclick="cg(event)" data-date="`+toFormat(m)+`">`+toFormat(m)+`</td>
               </tr>
   `; 
   }

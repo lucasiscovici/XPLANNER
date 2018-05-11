@@ -168,7 +168,7 @@
 				//LISTE DES CRUD PERIODES
 
 				var sessM = self.$session.actual.$p[quoi];
-				var ts=g.start.valueOf();//TIMESTAMP
+				var ts= g.name== "agendaWeek" ? g.start.valueOf(): g.intervalStart.valueOf();//TIMESTAMP
 				console.log(quoi)
 				console.log(ts)
 				var idS = this.$soup.session.timestamp(quoi,ts)
