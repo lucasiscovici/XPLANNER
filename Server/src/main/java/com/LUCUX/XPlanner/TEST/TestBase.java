@@ -63,7 +63,7 @@ public class TestBase {
 		// Date d = sdf.parse("01/03/2018") new Date();
 		Date d = TK.getFirstDayDate(new Date());
 		sess.date=d;
-		sess.months = TK.createStructureMWD(d);
+		sess.months = TK.createStructureMWD2(d);
 		DateFormat sF = DateFormat.getDateTimeInstance(
 
 				DateFormat.FULL,

@@ -9,7 +9,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -17,7 +17,7 @@ public class Month extends TodosBaseDate {
 	
 	@JsonIgnore
 	public List<Week> weeks = new ArrayList<Week>();
-	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true)
+	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
 	public List<Week> getWeeks() {
 		return weeks;
 	}

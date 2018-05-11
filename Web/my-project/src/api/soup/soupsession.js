@@ -9,7 +9,10 @@ class session extends soup {
         var $th = this.Vue;
         console.log(this.Vue.store)
         var th = $th.store.state.sesscur;
-        th[quoi] = add != undefined && add ? th[quoi].concat(ca) : ca;
+
+        if(! quoi in th || th[quoi]==undefined){th[quoi]=[];}
+        th[quoi] = add != undefined && add ?  th[quoi].concat(ca) : ca;
+        
         $th.store.dispatch("setSessCurr", th);
     }
     loadPeriode() {
@@ -19,23 +22,24 @@ class session extends soup {
         var ac = a.p
         var acp = a.$p
         return new Promise((r, e) => {
-            ac.month.GET().then((res) => {
-                acp.month.add(res.data, true)
-                this.addToSessCur("month", res.data)
+            a.months.GET().then((res) => {
+                acp.months.add(res.data)
+                this.addToSessCur("months", res.data)
                 // r()
                 // return 
-                var ml = TK.objToArr(acp.month.list)
+                var ml = TK.objToArr(acp.months.list)
                 console.log(ml)
                 for (var i = 0; i < ml.length; i++) {
                     var mi = ml[i];
-                    mi.GET().then((res2) => {
-                        acp.week.add(res2.data)
-                        this.addToSessCur("week", res2.data, true)
-                        for (var j = 0; j < acp.week.list.length; j++) {
-                            var wi = acp.week.list[j];
-                            wi.GET().then((res3) => {
-                                this.addToSessCur("month", res3.data, true)
-                                acp.day.add(res3.data)
+                    mi.weeks.GET().then((res2) => {
+                        acp.weeks.add(res2.data)
+                        this.addToSessCur("weeks", res2.data, true)
+                        var tyu=TK.objToArr(acp.weeks.list)
+                        for (var j = 0; j < tyu.length; j++) {
+                            var wi = tyu[j];
+                            wi.days.GET().then((res3) => {
+                                this.addToSessCur("days", res3.data, true)
+                                acp.days.add(res3.data)
                             });
                         }
                     })

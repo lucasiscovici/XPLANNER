@@ -58,7 +58,8 @@
         customTD2:null,
         okP:true,
         TDL2:"de la Session \""+this.$store.state.sesscur.name+"\"",
-        Tdl2Helper:"(pour les 3 mois)",
+        Tdl2HelperB:"(pour les 3 mois)",
+        Tdl2Helper:"",
         nameC:{"month":"month","agendaWeek":"week","agendaDay":"day","listDay":"month",
 "listWeek":"week",
 "listMonth":"day"}
@@ -66,6 +67,7 @@
 		},
 		components:{TDL:TDL},
 		created(){
+			this.Tdl2Helper=this.Tdl2HelperB;
 			this.customTD2=this.customSess();
 				this.$bus.$on("todoList::OK",this.tl)
 				this.$bus.$on("todoList::NOK",()=>this.okP=false);
@@ -118,6 +120,8 @@
 				var p="sess_"+this.custom();
 				var self = this;
 				var crud = self.$session.actual.todos;
+			this.Tdl2Helper=this.Tdl2HelperB;
+			this.TDL2="de la Session \""+this.$store.state.sesscur.name+"\"";
 
 				this.$fusion[p]={
 					crud:crud,
@@ -142,7 +146,7 @@
 			},
 			tl(g){
 				console.log("TL")
-				console.log(g.name)
+				console.log(g)
 				console.log(g.name=="customCACA");
 				if (g.name=="customCACA") {
 					this.customTD2=this.customSess();
@@ -159,12 +163,12 @@
 				this.TDL2=g.title[0].toUpperCase()+g.title.slice(1)
 				// console.log(g)
 				// console.log(g.intervalStart.valueOf())
-				var quoi = this.nameC[g.name] 
+				var quoi = this.nameC[g.name]+"s" 
 
 				//LISTE DES CRUD PERIODES
 
 				var sessM = self.$session.actual.$p[quoi];
-				var ts=g.intervalStart.valueOf();//TIMESTAMP
+				var ts=g.start.valueOf();//TIMESTAMP
 				console.log(quoi)
 				console.log(ts)
 				var idS = this.$soup.session.timestamp(quoi,ts)

@@ -9,12 +9,23 @@ class Periode extends Crud {
         super._reset()
          this.list={}
          this.pe=false;
+         this.childrenF=[];
     }
     //EACH P HAS TODOS
-    CustomConcreteCrud(o,t) {
+    CustomConcreteCrud(o,params) {
+       params= params == undefined ? [] : params;
+       params["todos"]=true;
         var secondObject         = this.cloneCCC(o);
-        if (t!=undefined && t) {
+        if (params["todos"]) {
             secondObject.todos       = secondObject.cloneCCC("todos");        
+        }
+        if (params["children"]) {
+            secondObject.childrenF=params["children"];
+        }
+        if (params["childrenF"]) {
+            for (var i = 0; i < params["childrenF"].length; i++) {
+                secondObject[params["childrenF"][i]]=secondObject.cloneCCC(params["childrenF"][i]);
+            }
         }
         return secondObject;
     }
@@ -29,9 +40,13 @@ class Periode extends Crud {
 
         for (var i = 0; i < d.length; i++) {
             var id = d[i].id;
-            var tt=this.CustomConcreteCrud(id,true);
+            // if (this.childrenF!=undefined) {
+
+
+            var tt=this.CustomConcreteCrud(id,{"childrenF":this.childrenF});
             this.list[id]=tt;
         }
+        // }
         
     }
     timestamp(){

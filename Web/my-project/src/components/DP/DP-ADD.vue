@@ -18,7 +18,7 @@
 	    class="ci"
 	                  v-model="namee"
 	                  type="text"
-	                  style="height: 100%;"
+	                  style="height: 100%;background-color: white;color:black;"
 	                  :state="state"
 	                  :aria-describedby="{getInputFeed,getInputHelp}"
 	                  :placeholder="placeholder"
@@ -41,6 +41,7 @@
 	    <datepicker 
 	    	:monday-first=true
 	    	language="fr"
+	    	required=""
 	    	v-model="date" 
 	    	placeholder="DEBUT"
 	    	:bootstrap-styling=true
@@ -49,6 +50,10 @@
 	    	:disabled="disabled">
 	
 	    </datepicker>
+	     <b-form-invalid-feedback 
+	    	class="feedDP">
+	    	{{feedbackDP}}
+	    </b-form-invalid-feedback>
 	     </b-form-group >
 	    <!-- <icon name="fa-calendar-plus"></icon>	 -->
 	    <!-- </div> -->
@@ -69,7 +74,8 @@
 	     </b-form-group > 
 	
     </b-col>
-    <b-col style="border:1px solid #e9ecef"> <b-button  type="submit" class="middle tcenter relative p-rel">OK<icon name="spinner" v-show="okok" style="color: white;"></icon></b-button></b-col>
+    <b-col style="border:1px solid #e9ecef"> <b-button style="width: 100%;
+    height: 100%;" type="submit" class="middle tcenter relative p-rel">OK<icon name="spinner" v-show="okok" style="color: white;"></icon></b-button></b-col>
 	</b-row>
  	</b-form>
 
@@ -93,13 +99,19 @@ export default {
 			dateFin:"",
 			namee:"",
 			date:null,
-			okok:false
+			okok:false,
+			feedbackDP:"mettre une date"
 		};
 	},
 	components:{ Datepicker },
 	methods:{
-		onSubmit(){
-this.okok=true;
+		onSubmit(f){
+			if (!this.okD) {
+				$(f).find(".feedDP").show();
+				$(f).find(".feedDP").parent().attr("state",true);
+				return;
+			}
+				this.okok=true;
 			var $this=this
 			// console.log("SUBMIT")
 			// this.$el.submit();
@@ -120,6 +132,7 @@ this.okok=true;
 			return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 		},
 		onDate(date){
+			this.okD=true
 			var slf=this.moment(date).add("3","months");
 			var month = this.capitalize(slf.format("MMM"));
 			this.dateFin=slf.format("DD")+" "+month+" "+slf.format("YYYY");

@@ -18,13 +18,13 @@
                 Déconnexion
             </button-spinner>
             <div v-if="AOK()">
-                <span @click="editing=true" class="btn btn-secondary" v-if="$auth.check()" v-show="!editing">
+                <span @click.self="Editing()" class="btn btn-secondary " v-if="$auth.check()" v-show="!editing">
                     {{title}}
                     <icon name="pencil-alt" style="color: white">
                     </icon>
                 </span>
                 <span>
-                    <input :class="['edit', 'tcenter',pb ? 'border: 1px solid red':'']" @keyup.enter="enter" @keyup.esc="esc" autofocus="" required="" type="text" v-click-outside="escO" v-if="editing" v-model="title" v-todo-focus="editing"/>
+                    <input :class="['ATitle','edit', 'tcenter',pb ? 'border: 1px solid red':'']" @keyup.enter="enter" @keyup.esc="esc"   required="" type="text" v-click-outside="escO" v-if="editing" v-model="title" />
                     <icon name="spinner" style="    left: -30px;
 ;position:relative;color: white" v-show="load">
                     </icon>
@@ -52,7 +52,7 @@
                             </icon>
                         </span>
                         <span>
-                            <input :class="['edit', 'tcenter',pb ? 'border: 1px solid red':'']" @keyup.enter="enterS" @keyup.esc="escS" autofocus="" required="" type="text" v-click-outside="escOS" v-if="editingS" v-model="$store.state.sesscur.name" v-todo-focus="editingS"/>
+                            <input :class="['edit', 'tcenter',pb ? 'border: 1px solid red':'']" @keyup.enter="enterS" @keyup.esc="escS"  required="" type="text" v-click-outside="escOS" v-if="editingS" v-model="$store.state.sesscur.name" />
                             <span @click="editingS=true" class="mh-10 c-pointer" style="font-size: 30px;" v-if="!editingS">
                                 {{$store.state.sesscur.name}}
                                 <icon name="pencil-alt" scale="1.25" style="color: white" >
@@ -127,6 +127,8 @@ export default {
     beforeMount() {
         console.log("bMount")
         if (this.$auth.check()) {
+                // this.title_=this.$store.state.user.username 
+
             // IF PAS DE USER -> LOGOUT
             if (this.$store.state.user == null) {
                 console.log("OCO")
@@ -152,21 +154,33 @@ export default {
     },
     beforeUpdate() {
         console.log("BeforeUp");
+            // this.title_=this.$store.state.user.username 
+
         // console.log(this.$store.state.user.userInfo.sessCur)
-        // if(this.$auth.check() && this.okDPF()){
+        if(! this.$auth.check()){
+            this.title_ = undefined;
         //      this.fc().then(()=>{
         //          this.okHome=true;
         //      });
-        // }
+        }
     },
     mounted() {
         console.log("mounted A")
+            this.title_=this.$store.state.user.username 
+
     },
     created() {
         this.$store.dispatch("rmOKDP");
         console.log("created");
+    this.title_=this.$store.state.user.username 
+
     },
     methods: {
+        Editing(){
+this.editing=true;
+setTimeout(()=>{
+$('.ATitle').focus()
+ },500);       },
         escO() {
             console.log(this.editing)
             if (this.editing) {
@@ -201,6 +215,7 @@ export default {
                         }).then((r) => {
                             if (r.data == "ok") {
                                 this.load = false
+                                this.editing=false
                             }
                             console.log(r)
                         });
@@ -309,7 +324,7 @@ export default {
     computed: {
         title:{
             get(){
-                this.title_=this.$store.state.user.username
+                this.title_=(this.title_ == undefined ? this.$store.state.user.username : this.title_)
                 return this.title_;
             },
             set(k){

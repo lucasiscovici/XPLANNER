@@ -1,7 +1,7 @@
 <template><div></div></template>
 
 <script>
-	
+	import TK from "../utils/tk.js"
 export default  {	
   props: {
     events: {
@@ -169,7 +169,7 @@ export default  {
             	// if (this.lm!=view.name) {
             	// 	this.lm!=view.name
             	// }
-            	self.$bus.$emit("todoList::OK",view);
+            	self.$bus.$emit("todoList::OK",TK.getFromObj(view,["name","title","start","end","intervalStart","intervalEnd"]));
 
 
 

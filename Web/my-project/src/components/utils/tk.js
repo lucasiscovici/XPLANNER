@@ -1,5 +1,36 @@
-
+const JSONOP = require('circular-json');
 export default  { 
+
+	getFromObj :function (obj,keys){
+		var fj={}
+		for(var i of Object.keys(obj)){
+			// console.log(i)
+			// console.log(i in keys)
+			if (keys.indexOf(i) !== -1) {
+				fj[i]=obj[i];
+			}
+		}
+		return fj;
+
+	},
+clone: function(hash) {
+	var cache = [];
+
+  var json = JSONOP.stringify(hash,function(key, value) {
+    if (typeof value === 'object' && value !== null) {
+        if (cache.indexOf(value) !== -1) {
+            // Circular reference found, discard key
+            return;
+        }
+        // Store value in our collection
+        cache.push(value);
+    }
+    return value;
+});
+  var object = JSONOP.parse(json);
+
+  return object;
+},
 	 objConcat : function(){
     for (var i=1; i<arguments.length; i++)
        for (var a in arguments[i])
@@ -8,7 +39,7 @@ export default  {
 },
 objToArr: function(obj){
 var f=[]
-for (var j in Object.keys(obj)) {
+for (var j of Object.keys(obj)) {
 	f.push(obj[j])
 }
 return f;

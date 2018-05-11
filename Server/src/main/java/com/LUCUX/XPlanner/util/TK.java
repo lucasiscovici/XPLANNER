@@ -151,13 +151,16 @@ public class TK {
 			j=7;
 		}
 		j-=1;
-		int iii=0;
+		int iii=j;
 		List<Day>  dda = new ArrayList<>();
 		Week w = null;
 		for (Day ddv: lmda ) {
-			
+			if (iii==j && iii!=0) {
+				w = new Week();
+				w.date=ddv.getDate();
+			}
 			if (iii%7==0) {
-				if (iii!=0) {
+				if (iii!=j) {
 					w.days.addAll(dda);
 					lmdw.add(w);
 					dda.clear();
@@ -170,7 +173,8 @@ public class TK {
 
 		}
 		if (dda.size()>0) {
-			w.days=dda;
+			w.days.addAll(dda);
+			lmdw.add(w);
 		}
 
 		// List<Month> lmdm = new ArrayList<>();
@@ -182,12 +186,14 @@ public class TK {
 			int vr = map.get(month);
 			lm.get(vr).getWeeks().add(ww);
 
+			System.out.println(month+" "+ww.getDate());
 			Calendar cal2 = Calendar.getInstance();
 			List<Day> sdl =ww.getDays();
-			cal2.setTime(sdl.get(sdl.size()-1).getDate());
+			Date ks  = sdl.get(sdl.size()-1).getDate();
+			cal2.setTime(ks);
 			int month2 = cal2.get(Calendar.MONTH);
 			if (month2!=month) {
-				
+				System.out.println(month2+" "+ks);
 			
 				int vrP = map.get(month2);
 				lm.get(vrP).getWeeks().add(ww);

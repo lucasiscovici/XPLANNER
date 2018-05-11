@@ -79,13 +79,13 @@ class Session extends Crud {
                     
                     // ac.day = a.super.CustomConcreteCrud("days");
                     // ac.week = a.super.CustomConcreteCrud("weeks");
-                    ac.month = a.CustomConcreteCrudSuper("months");
+                    a.months = a.CustomConcreteCrudSuper("months");
                     
                     
                     
-                    acp.day = p.CustomConcreteCrud("days");
-                    acp.week = p.CustomConcreteCrud("weeks");
-                    acp.month = p.CustomConcreteCrud("months");
+                    acp.days = p.CustomConcreteCrud("days");
+                    acp.weeks = p.CustomConcreteCrud("weeks",{"children":["days"]});
+                    acp.months = p.CustomConcreteCrud("months",{"children":["weeks"]});
 
                     $this.Vue.$soup.session.loadPeriode().then(r);
                     
