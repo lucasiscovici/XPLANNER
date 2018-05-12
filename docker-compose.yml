@@ -28,6 +28,8 @@ services:
       dockerfile: prod/Dockerfile
     image: front_prod
     container_name: front_prod
+    environment:
+      - API_URL=http://web:4000/
     ports:
       - "8000:80"
     depends_on:
@@ -35,10 +37,13 @@ services:
       - db
     networks:
       - my-network2
+      
   front:
     build:
       context: ./Web/my-project
     image: front
+    environment:
+      - API_URL=http://web:4000/
     container_name: front
     ports:
       - "8000:80"

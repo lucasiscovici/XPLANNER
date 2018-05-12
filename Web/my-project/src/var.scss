@@ -72,7 +72,7 @@ cursor:pointer;
 }
 .base{
 	 background-color: $brown;
-	color:white;z-index: 999999;width: 66%;left:15.5%;position: relative;top:50%;transform:translateY(-70%);max-width: 66%;overflow: hidden
+	color:white;z-index: 999999;width: 66%;left:15.5%;position: relative;top:50%;transform:translateY(-70%);max-width: 66%;
 }
 
 // @include cBM((selection:(background-color: $brown)),"::");
