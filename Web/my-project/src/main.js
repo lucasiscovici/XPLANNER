@@ -104,7 +104,7 @@ Vue.use(VueAuth, {
 })
 // console.log(process)
 
-Vue.axios.defaults.baseURL = 'http://'+location.hostname+':4000' ;
+Vue.axios.defaults.baseURL = 'http://web:4000' ;
 
 
 var VueVue = {
