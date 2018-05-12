@@ -14,16 +14,32 @@ services:
     build: 
       context: ./Server
     image: webs
+    container_name: web
     ports:
      - "4000:8080"
     depends_on:
      - db
     networks:
       - my-network2
+
+  front_prod:
+    build:
+      context: ./Web/my-project
+      dockerfile: prod/Dockerfile
+    image: front_prod
+    container_name: front_prod
+    ports:
+      - "8000:80"
+    depends_on:
+      - web
+      - db
+    networks:
+      - my-network2
   front:
     build:
       context: ./Web/my-project
     image: front
+    container_name: front
     ports:
       - "8000:80"
     depends_on:

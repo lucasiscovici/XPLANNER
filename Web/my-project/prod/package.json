@@ -1,0 +1,14 @@
+{
+  "name": "p3",
+  "description": "A Vue.js project",
+  "version": "1.0.0",
+  "author": "",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}

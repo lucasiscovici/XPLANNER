@@ -17,6 +17,8 @@
     "circular-json": "^0.5.4",
     "copy-webpack-plugin": "^4.5.1",
     "datejs": "^1.0.0-rc3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
     "moment": "^2.22.0",
     "popper.js": "^1.12.9",
     "postcss-loader": "^2.1.4",
