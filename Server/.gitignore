@@ -19,8 +19,12 @@
 
 ### NetBeans ###
 nbproject/private/
-build/
+build/classes
+build/reports
+build/resources
+build/test-results
+build/tmp
 nbbuild/
-#dist/
+dist/
 nbdist/
 .nb-gradle/
