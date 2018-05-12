@@ -19,18 +19,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class BaseDate extends Base {
 	 public Date date;
-	 @JsonIgnore
-	private List<Event> events = new ArrayList<Event>();
+	 //__FUTURE__
+	//  @JsonIgnore
+	// private List<Event> events = new ArrayList<Event>();
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@ElementCollection
-	public List<Event> getEvents() {
-		return events;
-	}
+	// @OneToMany(cascade=CascadeType.ALL)
+	// @ElementCollection
+	// public List<Event> getEvents() {
+	// 	return events;
+	// }
 
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
+	// public void setEvents(List<Event> events) {
+	// 	this.events = events;
+	// }
 
 	@Temporal(TemporalType.DATE)
 	public Date getDate() {

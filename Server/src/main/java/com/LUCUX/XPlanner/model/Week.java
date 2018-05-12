@@ -16,8 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Week extends TodosBaseDate {
 	public List<Day> days = new ArrayList<Day>();
 
-
-
 	@JsonIgnore
 	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
 	public List<Day> getDays() {

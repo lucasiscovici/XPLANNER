@@ -15,7 +15,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 
-@Entity
+//@Entity
 public class Todos extends IDS {
 	List<Todo> todosL= new ArrayList<Todo>();
 	

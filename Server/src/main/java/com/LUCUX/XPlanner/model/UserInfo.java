@@ -34,7 +34,6 @@ public class UserInfo extends IDS implements CrudD {
 	public Session sessCur = null;
 	
 	
-	
 	@JsonIgnore
 	@OneToOne
 	public User getUser() {

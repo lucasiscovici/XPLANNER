@@ -21,21 +21,33 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 
 @Entity
 @JsonFilter("SessionFilter")
-public class Session extends Todos {
+public class Session extends TodosBaseDate {
 
 	public static String[] getFiltered = {"goals","tasks","months","ui","todos"};
-
-	public Date date;
 	
 	public UserInfo ui;
-	
-	public String name;
-
-	List<Goal> goals = new ArrayList<Goal>();
-
+		
 	public List<Month> months = new ArrayList<Month>();
 	
-	List<Task> tasks = new ArrayList<Task>();
+	//__FUTURE__
+	//List<Goal> goals = new ArrayList<Goal>();
+	//List<Task> tasks = new ArrayList<Task>();
+	
+	// 	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true)
+	// public List<Goal> getGoals() {
+	// 	return goals;
+	// }
+	// public void setGoals(List<Goal> goals) {
+	// 	this.goals = goals;
+	// }
+	
+	// @OneToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true)
+	// public List<Task> getTasks() {
+	// 	return tasks;
+	// }
+	// public void setTasks(List<Task> tasks) {
+	// 	this.tasks = tasks;
+	// };
 	
 	
 	//GETTER_SETTER
@@ -50,28 +62,7 @@ public class Session extends Todos {
 		this.ui = ui;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	
-	@Temporal(TemporalType.DATE)
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	
-	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true)
-	public List<Goal> getGoals() {
-		return goals;
-	}
-	public void setGoals(List<Goal> goals) {
-		this.goals = goals;
-	}
 	
 	@OneToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true)
 	public List<Month> getMonths() {
@@ -80,15 +71,7 @@ public class Session extends Todos {
 	public void setMonths(List<Month> months) {
 		this.months = months;
 	}
-	
-	@OneToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true)
-	public List<Task> getTasks() {
-		return tasks;
-	}
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	};
-	
+
 	public String toString(){
 		return "SESSION "+this.getId()+"\n";
 	}

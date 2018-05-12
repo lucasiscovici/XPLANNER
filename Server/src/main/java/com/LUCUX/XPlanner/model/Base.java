@@ -18,15 +18,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-public class Base extends IDS{
+public class Base extends IDS {
 
 	
 	String name;
-	Date date;
-	@JsonIgnore
-	List<ListeItem> learn = new ArrayList<ListeItem>();
-	@JsonIgnore
-	List<ListeItem> will = new ArrayList<ListeItem>();
+	// Date date;
+
 
 	@Column(length=10000)
 	public String getName() {
@@ -36,29 +33,36 @@ public class Base extends IDS{
 		this.name = name;
 	}
 	
-	@Temporal(TemporalType.DATE)
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	@OneToMany(targetEntity=ListeItem.class)
-	@ElementCollection
-	public List<ListeItem> getLearn() {
-		return learn;
-	}
-	public void setLearn(List<ListeItem> learn) {
-		this.learn = learn;
-	}
-	@OneToMany(targetEntity=ListeItem.class)
-	@ElementCollection
-	public List<ListeItem> getWill() {
-		return will;
-	}
-	public void setWill(List<ListeItem> will) {
-		this.will = will;
-	}
+	// @Temporal(TemporalType.DATE)
+	// public Date getDate() {
+	// 	return date;
+	// }
+	// public void setDate(Date date) {
+	// 	this.date = date;
+	// }
+
+	//__FUTURE__
+	// @JsonIgnore
+	// List<ListeItem> learn = new ArrayList<ListeItem>();
+	// @JsonIgnore
+	// List<ListeItem> will = new ArrayList<ListeItem>();
+
+	// @OneToMany(targetEntity=ListeItem.class)
+	// @ElementCollection
+	// public List<ListeItem> getLearn() {
+	// 	return learn;
+	// }
+	// public void setLearn(List<ListeItem> learn) {
+	// 	this.learn = learn;
+	// }
+	// @OneToMany(targetEntity=ListeItem.class)
+	// @ElementCollection
+	// public List<ListeItem> getWill() {
+	// 	return will;
+	// }
+	// public void setWill(List<ListeItem> will) {
+	// 	this.will = will;
+	// }
 	
 	
 	
