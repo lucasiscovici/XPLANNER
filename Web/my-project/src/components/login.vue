@@ -16,7 +16,7 @@
 
 			     </b-form-group>
 
-            <button-spinner class="bg-brown b" styley="border:none" type="submit" variant="primary" :loading="load">
+            <button-spinner class="bg-brown b" styley="border: 1px solid white !important;" type="submit" variant="primary" :loading="load">
                 OK
             </button-spinner>
              <b-form-invalid-feedback id="inputLiveFeedback2" v-if="error">
@@ -98,10 +98,16 @@
 </script>
 <style scoped lang="scss">
 
-    .b-form-input {
-        width: 99%;
+    #exampleInput2,#exampleInput3 {
+        padding-left: 0px;        
         padding-right: 0px;
+        border-right-width: 0px;
+        border-left-width: 0px;
     }
+
+    //     width: 99%;
+    //     padding-right: 0px;
+    // }
     .Login{
         background-color: $brown;
     }

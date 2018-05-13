@@ -12,20 +12,20 @@
 			<b-list-group-item 
 				@click.self="addf"  
 				class="tcenter justify-content-between align-items-center">
-
+				<span name="cross" style="color:white;left:10px;position:absolute;" v-if="add" @click.self="addf"   >X</span>
 				<DPADD 
 				 	@SessionAdd="as"
 				 	@stop="addf"
 					v-if="add" 
 					dpid="inputADD" 
 					vmodel="ADD" 
-					name="Add Session"
+					name="Ajouter une session"
 					placeholder="Nom de la Session">
 				</DPADD>
 
 	    	    <div 
 	    	    	v-else class="tcenter" @click.self="addf" >
-	    	    	AJOUTER UNE SESSIONS
+	    	    	AJOUTER UNE SESSION
 	    	    </div>
 
 	    	</b-list-group-item>

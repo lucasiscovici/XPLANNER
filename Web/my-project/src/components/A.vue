@@ -150,8 +150,15 @@ export default {
             // SI PAS DP ON RELOAD
             else if (!this.okDPF()) {
                 this.reload();
+                this.title_=this.$store.state.user.username 
+            this.title_OLD=this.title_;
                 
             }
+
+            this.title_=this.$store.state.user.username 
+            this.title_OLD=this.title_;
+        
+
         }
     },
     beforeUpdate() {
@@ -161,21 +168,38 @@ export default {
         // console.log(this.$store.state.user.userInfo.sessCur)
         if(! this.$auth.check()){
             this.title_ = undefined;
+            this.title_OLD=undefined;
         //      this.fc().then(()=>{
         //          this.okHome=true;
         //      });
         }
+        if(this.$auth.check()){
+            if (this.title==undefined) {
+                this.title_OLD=undefined;
+            }
+            if (this.title_OLD==undefined) {
+            this.title_=this.$store.state.user.username 
+            this.title_OLD=this.title_;
+            }
+        }
+
     },
     mounted() {
         console.log("mounted A")
+                if(this.$auth.check()){
+
             this.title_=this.$store.state.user.username 
             this.title_OLD=this.title_;
+        }
 
     },
     created() {
         this.$store.dispatch("rmOKDP");
         console.log("created");
-    this.title_=this.$store.state.user.username 
+        if(this.$auth.check()){
+    this.title_=this.$store.state.user.username
+    this.title_OLD=this.title_;
+    } 
 
     },
     methods: {

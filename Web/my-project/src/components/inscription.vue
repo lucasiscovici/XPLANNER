@@ -26,7 +26,7 @@
 			    </b-form-invalid-feedback>
 			</b-form-group>
 
-            <button-spinner class="bg-brown b" type="submit" variant="primary" :loading="load">
+            <button-spinner class="bg-brown b" styley="border: 1px solid white !important;" type="submit" variant="primary" :loading="load">
                 OK
             </button-spinner>
              <b-form-invalid-feedback id="inputLiveFeedback2">
@@ -117,7 +117,14 @@
 </script>
 
 <style  lang="scss" scoped>
-
+#exampleInput2,
+#exampleInput3,
+#exampleInput4{
+	 padding-left: 0px;        
+        padding-right: 0px;
+        border-right-width: 0px;
+        border-left-width: 0px;
+}
 .insc{
 	 background-color: $brown;
 }
