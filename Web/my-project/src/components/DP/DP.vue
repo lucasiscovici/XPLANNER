@@ -1,6 +1,9 @@
 <template>
 <div>
-	<div class="me base bg-brown p-rel tcenter" style="margin-top:350px;">
+	<div class="me base bg-brown p-rel tcenter" style="    margin-top: 50vh;
+    overflow-y: scroll;
+    max-height: 310px;
+    transform: translateY(-50%)">
 <h1 style="color:white">
             Sessions
         </h1>
