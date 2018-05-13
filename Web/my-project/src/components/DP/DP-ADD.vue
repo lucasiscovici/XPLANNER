@@ -117,7 +117,7 @@ export default {
 			// this.$el.submit();
 			// console.log(this.date)
 			// console.log(this.moment(this.date).format('x'))
-			this.$user.addSession({"name":this.namee,"date":this.moment(this.date).add("1","day")})
+			this.$user.addSession({"name":this.namee,"date":this.moment(this.date).add("1","day").startOf('month')})
 			.then(()=>{
 				this.$emit("stop");
 				this.okok=false;
